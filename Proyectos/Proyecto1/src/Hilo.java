@@ -30,6 +30,21 @@ public class Hilo extends Thread{
         this.source=source;
         this.turno=turno;
     }
+    public int gestionVidas(){
+        if(juego.BMatriz[x-1][y-1].getName().equalsIgnoreCase("bomba")&&juego.BMatriz[x][y].getName().equals("jugador1")){
+                  return  juego.vida1--;
+                }
+                if(juego.BMatriz[x-1][y-1].getName().equalsIgnoreCase("vida")&&juego.BMatriz[x][y].getName().equals("jugador1")){
+                  return  juego.vida1++;
+                }
+                if(juego.BMatriz[x-1][y-1].getName().equalsIgnoreCase("bomba")&&juego.BMatriz[x][y].getName().equals("jugador2")){
+                   return juego.vida2--;
+                }
+                if(juego.BMatriz[x-1][y-1].getName().equalsIgnoreCase("vida")&&juego.BMatriz[x][y].getName().equals("jugador2")){
+                   return juego.vida2++;
+                }
+                return 0;
+    }
     
     public void mover(int cantidad){ 
        if(source==1){
@@ -41,18 +56,8 @@ public class Hilo extends Thread{
                 return;
             }
             else{
-//                if(juego.BMatriz[x-1][y-1].getName().equalsIgnoreCase("bomba")&&juego.BMatriz[x][y].getName().equals("jugador1")){
-//                    juego.vida1--;
-//                }
-//                if(juego.BMatriz[x-1][y-1].getName().equalsIgnoreCase("vida")&&juego.BMatriz[x][y].getName().equals("jugador1")){
-//                    juego.vida1++;
-//                }
-//                if(juego.BMatriz[x-1][y-1].getName().equalsIgnoreCase("bomba")&&juego.BMatriz[x][y].getName().equals("jugador2")){
-//                    juego.vida2--;
-//                }
-//                if(juego.BMatriz[x-1][y-1].getName().equalsIgnoreCase("vida")&&juego.BMatriz[x][y].getName().equals("jugador2")){
-//                    juego.vida2++;
-//                }
+            
+//            gestionVidas();
             juego.BMatriz[x-1][y].setIcon(juego.BMatriz[x][y].getIcon());
             juego.BMatriz[x-1][y].setBorder(juego.BMatriz[x][y].getBorder());
             juego.BMatriz[x][y].setIcon(null);
@@ -67,8 +72,10 @@ public class Hilo extends Thread{
             }
             if(turno==true){
                 juego.x1=x;
+                juego.per1++;
             }else{
                 juego.x2=x;
+                juego.per2++;
             }
             return;
         } catch (InterruptedException ex) {
@@ -108,8 +115,10 @@ public class Hilo extends Thread{
             }
             if(turno==true){
                 juego.x1=x;
+                juego.per1++;
             }else{
                 juego.x2=x;
+                juego.per2++;
             }
             return;
         } catch (InterruptedException ex) {
@@ -140,8 +149,10 @@ public class Hilo extends Thread{
             }
             if(turno==true){
                 juego.y1=y;
+                juego.per1++;
             }else{
                 juego.y2=y;
+                juego.per2++;
             }
             
             return;
@@ -172,8 +183,10 @@ public class Hilo extends Thread{
             }
             if(turno==true){
                 juego.y1=y;
+                juego.per1++;
             }else{
                 juego.y2=y;
+                juego.per2++;
             }
             return;
         } catch (InterruptedException ex) {

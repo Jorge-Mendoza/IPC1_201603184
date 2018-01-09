@@ -1,0 +1,13 @@
+digraph lista{
+rankdir=LR
+node [margin=0 fontcolor=blue fontsize=20 width=0.5 shape=box style=filled]
+nodo464438369[label="null"];
+nodo2022427168[label="Estacion: 2022427168"];
+nodo464438369->nodo2022427168;
+nodo2022427168->nodo464438369;
+nodo256879001[label="Estacion: 256879001"];
+nodo2022427168->nodo256879001;
+nodo256879001->nodo2022427168;
+
+
+}

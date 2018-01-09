@@ -247,6 +247,7 @@ public class Eleccion extends javax.swing.JFrame {
         obj.asignarPersonajes(personajes,orden,direcciones);
         obj.creaItems(tamaño);
         obj.setVisible(true);
+        obj.t.start();
         this.setVisible(false);
         
         

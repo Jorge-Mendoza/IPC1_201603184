@@ -1,0 +1,10 @@
+digraph lista{
+rankdir=LR
+node [margin=0 fontcolor=blue fontsize=20 width=0.5 shape=box style=filled]
+nodo399226122[label="null"];
+nodo1622075067[label="Avion: 1622075067"];
+nodo399226122->nodo1622075067;
+nodo1622075067->nodo399226122;
+
+
+}

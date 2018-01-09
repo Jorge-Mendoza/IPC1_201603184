@@ -3,6 +3,8 @@
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.TimerTask;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -27,6 +29,8 @@ public class Juego extends javax.swing.JFrame {
     int vida1=5;
     int vida2=5;
     boolean turno;
+    Timer t;
+    int h,m,s,cs;
     /**
      * Creates new form Juego
      */
@@ -38,7 +42,37 @@ public class Juego extends javax.swing.JFrame {
         jLabel14.setText(String.valueOf(vida1));
        turno=true;
        getTablero();
+       per1=0;
+       per2=3;
+       t=new Timer(10,accion);
+       h=0;
+       boolean salida=false;
     }
+    Eleccion eleccion=new Eleccion();
+    ActionListener accion=new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            cs++;
+            if(cs==100){
+                cs=0;
+                ++s;
+            }
+            if(s==60){
+                s=0;
+                ++m;
+            }
+            if(m==5){
+                m=0;
+                ++h;
+            }
+        }
+        
+    };
+    public void actualiza(){
+        String tiempo=(h<=9?"0":"")+h+":"+(m<=9?"0":"")+m+":"+(s<=9?"0":"")+s+":"+(cs<=9?"0":"")+cs;
+        jTextField3.setText(tiempo);
+    }
+    
     
     public Juego(){
         jLabel13.setText(String.valueOf(vida1));
@@ -407,6 +441,7 @@ Hilo hilo=null;
         turno=false;
         this.BMatriz=hilo.juego.BMatriz;
         vida1=hilo.juego.vida1;
+        per1++;
         return;
         }
         if(turno==false){
@@ -417,6 +452,7 @@ Hilo hilo=null;
         turno=true;
         this.BMatriz=hilo.juego.BMatriz;
         vida2=hilo.juego.vida2;
+        per2++;
         return;
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -477,7 +513,8 @@ Hilo hilo=null;
         direcciones=c;
     }
     
-    int x1,y1,x2,y2;
+    int x1,y1,x2,y2,per1,per2;
+    
     
     public void creaItems(int tamaño) {
         int cantidad = tamaño * tamaño;
@@ -517,7 +554,7 @@ Hilo hilo=null;
         int columna=(int)Math.floor(Math.random()*((tamaño-1)-0+1)+(0));
         
         if(contador==0){
-            ImageIcon ima=new ImageIcon(direcciones[0]);
+            ImageIcon ima=new ImageIcon(direcciones[per1]);
             Icon icono=new ImageIcon(ima.getImage().getScaledInstance(BMatriz[fila][columna].getWidth(),BMatriz[fila][columna].getHeight() , Image.SCALE_AREA_AVERAGING));
             BMatriz[fila][columna].setIcon(icono);
             BMatriz[fila][columna].setBorder(new LineBorder(Color.RED));
@@ -527,7 +564,7 @@ Hilo hilo=null;
             y1=columna;
             contador++;
         }else if(contador==1){
-            ImageIcon ima=new ImageIcon(direcciones[3]);
+            ImageIcon ima=new ImageIcon(direcciones[per2]);
             Icon icono=new ImageIcon(ima.getImage().getScaledInstance(BMatriz[fila][columna].getWidth(),BMatriz[fila][columna].getHeight() , Image.SCALE_AREA_AVERAGING));
             BMatriz[fila][columna].setIcon(icono);
             BMatriz[fila][columna].setBorder(new LineBorder(Color.GREEN));
